@@ -10,7 +10,7 @@ public class Person implements Cloneable, Comparable<Person> {
 
     public Person(String name, Date birthday, int passport) {
         this.name = name;
-        this.birthday = birthday;
+        this.birthday = (Date) birthday.clone();
         this.passport = passport;
     }
 
@@ -19,7 +19,7 @@ public class Person implements Cloneable, Comparable<Person> {
     }
 
     public Date getBirthday() {
-        return birthday;
+        return (Date) birthday.clone();
     }
 
     public int getPassport() {
@@ -47,12 +47,15 @@ public class Person implements Cloneable, Comparable<Person> {
         if (comparableValue == 0) {
             comparableValue = this.passport - secondPerson.passport;
         }
-        return (int) comparableValue / Math.abs(comparableValue);
+        return comparableValue;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.name);
+        hash = 41 * hash + Objects.hashCode(this.birthday);
+        hash = 41 * hash + this.passport;
         return hash;
     }
 
@@ -72,7 +75,7 @@ public class Person implements Cloneable, Comparable<Person> {
             return false;
         }
         return this.passport == other.passport;
-    }
+    }    
 
     @Override
     public String toString() {
