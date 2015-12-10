@@ -48,12 +48,12 @@ public class PersonTest {
         Person somebody = new Person("Alex", createDate(3, 15, 1993), 156);
         Person somebodySecond = new Person("Murzik Kot", createDate(3, 15, 1990), 157);
         int result = somebody.compareTo(somebodySecond);
-        assertEquals(-1, result);
+        assertTrue(result < 0);
         
         somebody = new Person("Alexey", createDate(3, 15, 1983), 156);
         somebodySecond = new Person("Murzik Kot", createDate(3, 15, 1990), 157);
         result = somebody.compareTo(somebodySecond);
-        assertEquals(1, result);
+        assertTrue(result > 0);
     }
     
     private static Date createDate(int month, int day, int year) {
